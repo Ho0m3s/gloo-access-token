@@ -8,16 +8,16 @@ format:
 #----------------------------------------------------------------------------------
 
 # Set this variable to the version of GlooE you want to target
-GLOOE_VERSION ?= 1.8.1
+GLOOE_VERSION ?= 1.11.21
 
 # Set this variable to the name of your build plugin
-PLUGIN_BUILD_NAME ?= RequiredHeader.so
+PLUGIN_BUILD_NAME ?= AccessToken.so
 
 # Set this variable to the image name and tag of your plugin
 PLUGIN_IMAGE ?= gloo-ext-auth-plugins:$(GLOOE_VERSION)
 
 # Set this variable to the name of your plugin
-PLUGIN_NAME ?= required_header
+PLUGIN_NAME ?= access_token
 
 # Set this variable to the base image name for the container that will have the compiled plugin
 RUN_IMAGE ?= alpine:3.11
@@ -35,13 +35,7 @@ PLUGIN_MODULE_PATH := $(shell grep module go.mod | head -n 1 | cut -d ' ' -f 2-)
 #----------------------------------------------------------------------------------
 .PHONY: build
 build: $(GLOOE_DIR)/build_env
-	docker build --no-cache \
-		--build-arg GO_BUILD_IMAGE=$(call get_glooe_var,GO_BUILD_IMAGE) \
-		--build-arg RUN_IMAGE=$(RUN_IMAGE) \
-		--build-arg GLOOE_VERSION=$(GLOOE_VERSION) \
-		--build-arg STORAGE_HOSTNAME=$(STORAGE_HOSTNAME) \
-		--build-arg PLUGIN_MODULE_PATH=$(PLUGIN_MODULE_PATH) \
-		-t $(PLUGIN_IMAGE) .
+	docker build --no-cache --build-arg GO_BUILD_IMAGE=$(call get_glooe_var,GO_BUILD_IMAGE) --build-arg RUN_IMAGE=$(RUN_IMAGE) --build-arg GLOOE_VERSION=$(GLOOE_VERSION) --build-arg STORAGE_HOSTNAME=$(STORAGE_HOSTNAME) --build-arg PLUGIN_MODULE_PATH=$(PLUGIN_MODULE_PATH) -t $(PLUGIN_IMAGE) .
 
 #----------------------------------------------------------------------------------
 # Retrieve GlooE build information

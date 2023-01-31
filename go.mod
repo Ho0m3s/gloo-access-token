@@ -1,6 +1,6 @@
-module github.com/solo-io/ext-auth-plugin-examples
+module github.com/Ho0m3s/gloo-access-token
 
-go 1.16
+go 1.19.5
 
 require (
 	// Merged 'require' section of the Gloo depenencies and your go.mod file:

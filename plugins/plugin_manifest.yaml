@@ -1,9 +1,9 @@
-name: RequiredHeader
-pluginFileName: RequiredHeader.so
+name: AccessToken
+pluginFileName: AccessToken.so
 exportedSymbolName: Plugin
 config:
-  RequiredHeader: my-auth-header
+  AccessToken: x-userinfo
   AllowedValues:
-  - foo
-  - bar
-  - baz
+    - foo
+    - bar
+    - baz
